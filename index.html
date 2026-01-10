@@ -1,14 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body>
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glow Lab</title>
 
-<script src="/assets/js/script.js"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="bg-overlay min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-black/70 backdrop-blur-md text-white px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold tracking-wide">Glow Lab</h1>
+    <button onclick="" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition">
+      + Add Product</button>
+  </nav>
+
+  <!-- Loader -->
+  <div id="loader" class="flex justify-center items-center mt-20">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+  </div>
+
+  <!-- Product Grid -->
+  <div id="productGrid"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+  </div>
+
+  <!-- Modal -->
+  <div id="productModal"
+    class="fixed inset-0 bg-black/60 hidden justify-center items-center">
+    <div class="bg-white rounded-xl w-full max-w-md p-6 relative">
+      <h2 id="modalTitle" class="text-xl font-bold mb-4">Add Product</h2>
+
+      <form id="productForm" class="space-y-4">
+        <input type="hidden" id="productId">
+
+        <input id="title" type="text" placeholder="Product Title"
+          class="w-full border p-2 rounded-lg" required>
+
+        <input id="price" type="number" placeholder="Price"
+          class="w-full border p-2 rounded-lg" required>
+
+        <input id="category" type="text" placeholder="Category"
+          class="w-full border p-2 rounded-lg" required>
+
+        <input id="image" type="text" placeholder="Image URL"
+          class="w-full border p-2 rounded-lg">
+
+        <div class="flex justify-end gap-3">
+          <button type="button" onclick=""
+            class="px-4 py-2 bg-gray-300 rounded-lg">Cancel</button>
+          <button type="submit"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-lg">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>
