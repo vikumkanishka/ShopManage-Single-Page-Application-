@@ -4,7 +4,7 @@ const loader = document.getElementById("loader");
 const modal = document.getElementById("productModal");
 const form = document.getElementById("productForm");
 
-// Load products
+
 async function loadProducts() {
     try {
         const res = await fetch(API_URL + "?limit=16");
@@ -17,32 +17,50 @@ async function loadProducts() {
     }
 }
 
-// Display products
+
 function displayProducts(products) {
     grid.innerHTML = "";
-    products.forEach(p => {
-        grid.innerHTML += `
-      <div id="product-${p.id}"
-        class="product-card rounded-xl overflow-hidden shadow-lg">
-        <img src="${p.thumbnail}" class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-bold text-lg">${p.title}</h3>
-          <p class="text-indigo-600 font-semibold">$${p.price}</p>
-          <span class="text-sm bg-gray-200 px-2 py-1 rounded">${p.category}</span>
-
-          <div class="flex gap-2 mt-4">
-            <button onclick='openEditModal(${JSON.stringify(p)})'
-              class="flex-1 bg-yellow-400 rounded-lg py-1">Edit</button>
-            <button onclick="deleteProduct(${p.id})"
-              class="flex-1 bg-red-500 text-white rounded-lg py-1">Delete</button>
+  
+    products.forEach(function (p) {
+      grid.innerHTML += `
+        <div id="product-${p.id}"
+          class="product-card rounded-xl overflow-hidden shadow-lg">
+          
+          <img src="${p.thumbnail}" class="h-48 w-full object-cover">
+  
+          <div class="p-4 space-y-2">
+            <h3 class="font-bold text-lg">${p.title}</h3>
+  
+            <!-- Description -->
+            <p class="text-sm text-gray-600 line-clamp-2">
+              ${p.description ? p.description : "No description available."}
+            </p>
+  
+            <p class="text-indigo-600 font-semibold">$${p.price}</p>
+  
+            <span class="inline-block text-xs bg-gray-200 px-2 py-1 rounded">
+              ${p.category}
+            </span>
+  
+            <div class="flex gap-2 mt-4">
+              <button onclick='openEditModal(${JSON.stringify(p)})'
+                class="buttonEdit flex-1 hover:bg-yellow-500 rounded-lg py-1 transition">
+                Edit
+              </button>
+  
+              <button onclick="deleteProduct(${p.id})"
+                class="buttonDelete flex-1 hover:bg-red-600 text-white rounded-lg py-1 transition">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
     });
-}
+  }
+  
 
-// Modal controls
+
 function openAddModal() {
     form.reset();
     productId.value = "";
@@ -66,7 +84,7 @@ function closeModal() {
     modal.classList.add("hidden");
 }
 
-// Submit form
+
 form.addEventListener("submit", async e => {
     e.preventDefault();
     const id = productId.value;
@@ -102,12 +120,12 @@ form.addEventListener("submit", async e => {
     }
 });
 
-// Delete
+
 async function deleteProduct(id) {
     if (!confirm("Delete this product?")) return;
     await fetch(API_URL + "/" + id, { method: "DELETE" });
     document.getElementById("product-" + id).remove();
 }
 
-// Init
+
 loadProducts();

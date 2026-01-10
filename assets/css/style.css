@@ -1,4 +1,4 @@
-/* Background Image */
+
 .bg-overlay {
     background:
       url("/assets/img/back.jpg");
@@ -7,7 +7,7 @@
     background-attachment: fixed;
   }
   
-  /* Card hover animation */
+  
   .product-card {
     background-color: rgba(51, 48, 48, 0.321);
     backdrop-filter: blur(10px);
@@ -17,4 +17,20 @@
   .product-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+  }
+  .navigatebar {
+    /* background-color:#850e366b; */
+    backdrop-filter: blur(10px);
+    background: #850e36dd;
+  }
+  .buttonEdit {
+    background-color: #EE6983;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+
+  .buttonDelete {
+    background-color: #b02742;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
   }
