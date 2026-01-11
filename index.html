@@ -55,6 +55,30 @@
     </div>
   </section>
 
+  <!-- Categories Filter Section -->
+  <section class="categories-filter-section">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-bold text-white text-center mb-6">Shop by Category</h2>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="filterByCategory('all')" class="category-btn active" data-category="all">
+          All Products
+        </button>
+        <button onclick="filterByCategory('beauty')" class="category-btn" data-category="beauty">
+          Beauty
+        </button>
+        <button onclick="filterByCategory('fragrances')" class="category-btn" data-category="fragrances">
+          Fragrances
+        </button>
+        <button onclick="filterByCategory('furniture')" class="category-btn" data-category="furniture">
+          Furniture
+        </button>
+        <button onclick="filterByCategory('groceries')" class="category-btn" data-category="groceries">
+          Groceries
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- Main Content -->
   <main class="flex-grow">
     <!-- Loader -->
@@ -111,4 +135,4 @@
 
   <script src="/assets/js/app.js"></script>
 </body>
-</html> 
+</html>

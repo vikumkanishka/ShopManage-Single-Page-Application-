@@ -5,6 +5,7 @@ const modal = document.getElementById("productModal");
 const form = document.getElementById("productForm");
 
 let productsArray = [];
+let currentCategory = 'all';
 
 async function loadProducts() {
     loader.style.display = "flex";
@@ -60,6 +61,32 @@ function displayProducts(products) {
       `;
       grid.innerHTML += productCard;
     });
+}
+
+// Filter products by category
+function filterByCategory(category) {
+    currentCategory = category;
+    
+    // Update active button state
+    document.querySelectorAll('.category-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-category="${category}"]`).classList.add('active');
+    
+    // Filter and display products
+    let filteredProducts;
+    if (category === 'all') {
+        filteredProducts = productsArray;
+    } else {
+        filteredProducts = productsArray.filter(function(p) {
+            return p.category.toLowerCase() === category.toLowerCase();
+        });
+    }
+    
+    displayProducts(filteredProducts);
+    
+    // Smooth scroll to product grid
+    document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function openAddModal() {
