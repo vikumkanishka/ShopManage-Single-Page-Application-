@@ -11,7 +11,7 @@
   
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body class="bg-overlay min-h-screen">
+<body class="bg-overlay min-h-screen flex flex-col">
 
   
   <nav class="navigatebar backdrop-blur-md text-white px-6 py-4 flex justify-between items-center">
@@ -19,19 +19,60 @@
     <button onclick="openAddModal()" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition"> + Add Product</button>
   </nav>
 
-  
-  <div id="loader" class="flex justify-center items-center mt-20">
-    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero-section py-20 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 hero-title">
+        Discover Amazing Products
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-100 mb-8 hero-subtitle">
+        Your trusted destination for quality products across all categories
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'})" 
+          class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+          Browse Products
+        </button>
+        <button onclick="openAddModal()" 
+          class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+          Add New Product
+        </button>
+      </div>
+      
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-6 mt-16 max-w-2xl mx-auto">
+        <div class="hero-stat">
+          <h3 class="text-3xl font-bold text-white mb-2">500+</h3>
+          <p class="text-gray-200 text-sm">Products</p>
+        </div>
+        <div class="hero-stat">
+          <h3 class="text-3xl font-bold text-white mb-2">50+</h3>
+          <p class="text-gray-200 text-sm">Categories</p>
+        </div>
+        <div class="hero-stat">
+          <h3 class="text-3xl font-bold text-white mb-2">24/7</h3>
+          <p class="text-gray-200 text-sm">Support</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  
-  <div id="productGrid"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
-  </div>
+  <!-- Main Content Wrapper -->
+  <main class="flex-grow">
+    
+    <div id="loader" class="flex justify-center items-center mt-20">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+    </div>
+
+    
+    <div id="productGrid"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+    </div>
+  </main>
 
   
   <div id="productModal"
-    class="fixed inset-0 bg-black/60 hidden justify-center items-center">
+    class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50">
     <div class="bg-white rounded-xl w-full max-w-md p-6 relative">
       <h2 id="modalTitle" class="text-xl font-bold mb-4">Add Product</h2>
 
@@ -66,6 +107,49 @@
   </div>
 
   
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="max-w-6xl mx-auto px-6 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- About Section -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">About Our Shop</h3>
+          <p class="text-gray-200 text-sm leading-relaxed">
+            Welcome to Product Manager - your one-stop destination for quality products at competitive prices. 
+            We pride ourselves on offering a diverse range of items across multiple categories, 
+            ensuring there's something for everyone. Our commitment is to provide exceptional 
+            customer service and authentic products with warranty protection.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-200 text-sm">
+            <li><a href="#" class="hover:text-emerald-400 transition">Home</a></li>
+            <li><a href="#" class="hover:text-emerald-400 transition">Products</a></li>
+            <li><a href="#" class="hover:text-emerald-400 transition">About Us</a></li>
+            <li><a href="#" class="hover:text-emerald-400 transition">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+          <ul class="space-y-2 text-gray-200 text-sm">
+            <li>📧 info@productmanager.com</li>
+            <li>📞 +1 (555) 123-4567</li>
+            <li>📍 123 Shopping Street, City</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-400 mt-8 pt-6 text-center text-gray-300 text-sm">
+        <p>&copy; 2024 Product Manager. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
   <script src="/assets/js/app.js"></script>
 </body>
 </html>
