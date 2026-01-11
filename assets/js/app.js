@@ -4,19 +4,21 @@ const loader = document.getElementById("loader");
 const modal = document.getElementById("productModal");
 const form = document.getElementById("productForm");
 
+// Global array to store products
+let productsArray = [];
 
 async function loadProducts() {
     try {
         const res = await fetch(API_URL + "?limit=16");
         const data = await res.json();
-        displayProducts(data.products);
+        productsArray = data.products; // Store in array
+        displayProducts(productsArray);
     } catch {
         alert("Failed to load products");
     } finally {
         loader.style.display = "none";
     }
 }
-
 
 function displayProducts(products) {
     grid.innerHTML = "";
@@ -60,7 +62,6 @@ function displayProducts(products) {
   }
   
 
-
 function openAddModal() {
     form.reset();
     productId.value = "";
@@ -84,7 +85,6 @@ function closeModal() {
     modal.classList.add("hidden");
 }
 
-
 form.addEventListener("submit", async e => {
     e.preventDefault();
     const id = productId.value;
@@ -103,6 +103,11 @@ form.addEventListener("submit", async e => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(product)
             });
+            // Update in array
+            const index = productsArray.findIndex(p => p.id == id);
+            if (index !== -1) {
+                productsArray[index] = { ...productsArray[index], ...product };
+            }
             alert("Product Updated");
         } else {
             const res = await fetch(API_URL + "/add", {
@@ -110,22 +115,24 @@ form.addEventListener("submit", async e => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(product)
             });
-            console.log(await res.json());
+            const newProduct = await res.json();
+            // Add to array
+            productsArray.unshift(newProduct);
             alert("Product Added");
         }
         closeModal();
-        loadProducts();
+        displayProducts(productsArray); // Display from array
     } catch {
         alert("Save failed");
     }
 });
 
-
 async function deleteProduct(id) {
     if (!confirm("Delete this product?")) return;
     await fetch(API_URL + "/" + id, { method: "DELETE" });
+    // Remove from array
+    productsArray = productsArray.filter(p => p.id !== id);
     document.getElementById("product-" + id).remove();
 }
-
 
 loadProducts();
