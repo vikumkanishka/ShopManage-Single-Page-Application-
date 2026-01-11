@@ -4,19 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Manager</title>
-
-  
   <script src="https://cdn.tailwindcss.com"></script>
-
-  
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="bg-overlay min-h-screen flex flex-col">
 
-  
+  <!-- Navigation Bar -->
   <nav class="navigatebar backdrop-blur-md text-white px-6 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold tracking-wide">Product Manager</h1>
-    <button onclick="openAddModal()" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition"> + Add Product</button>
+    <button onclick="openAddModal()" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition">
+      + Add Product
+    </button>
   </nav>
 
   <!-- Hero Section -->
@@ -57,48 +55,44 @@
     </div>
   </section>
 
-  <!-- Main Content Wrapper -->
+  <!-- Main Content -->
   <main class="flex-grow">
-    
-    <div id="loader" class="flex justify-center items-center mt-20">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+    <!-- Loader -->
+    <div id="loader" class="flex justify-center items-center mt-20 mb-20">
+      <div class="flex flex-col items-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+        <p class="text-white text-lg">Loading products...</p>
+      </div>
     </div>
 
-    
-    <div id="productGrid"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 min-h-[400px]">
     </div>
   </main>
 
-  
-  <div id="productModal"
-    class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50">
+  <!-- Product Modal -->
+  <div id="productModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50">
     <div class="bg-white rounded-xl w-full max-w-md p-6 relative">
       <h2 id="modalTitle" class="text-xl font-bold mb-4">Add Product</h2>
 
       <form id="productForm" class="space-y-4">
         <input type="hidden" id="productId">
 
-        <input id="title" type="text" placeholder="Product Title"
-          class="w-full border p-2 rounded-lg" required>
+        <input id="title" type="text" placeholder="Product Title" class="w-full border p-2 rounded-lg" required>
 
-        <textarea id="description" placeholder="Product Description"
-          class="w-full border p-2 rounded-lg" rows="3"></textarea>
+        <textarea id="description" placeholder="Product Description" class="w-full border p-2 rounded-lg" rows="3"></textarea>
 
-        <input id="price" type="number" placeholder="Price"
-          class="w-full border p-2 rounded-lg" required>
+        <input id="price" type="number" placeholder="Price" class="w-full border p-2 rounded-lg" required>
 
-        <input id="category" type="text" placeholder="Category"
-          class="w-full border p-2 rounded-lg" required>
+        <input id="category" type="text" placeholder="Category" class="w-full border p-2 rounded-lg" required>
 
-        <input id="image" type="text" placeholder="Image URL"
-          class="w-full border p-2 rounded-lg">
+        <input id="image" type="text" placeholder="Image URL" class="w-full border p-2 rounded-lg">
 
         <div class="flex justify-end gap-3">
-          <button type="button" onclick="closeModal()"
-            class="px-4 py-2 bg-gray-300 rounded-lg">Cancel</button>
-          <button type="submit"
-            class="px-4 py-2 bg-indigo-600 text-white rounded-lg">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded-lg">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg">
             Save
           </button>
         </div>
@@ -106,46 +100,12 @@
     </div>
   </div>
 
-  
   <!-- Footer -->
   <footer class="footer-section">
-    <div class="max-w-6xl mx-auto px-6 py-10">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- About Section -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-4">About Our Shop</h3>
-          <p class="text-gray-200 text-sm leading-relaxed">
-            Welcome to Product Manager - your one-stop destination for quality products at competitive prices. 
-            We pride ourselves on offering a diverse range of items across multiple categories, 
-            ensuring there's something for everyone. Our commitment is to provide exceptional 
-            customer service and authentic products with warranty protection.
-          </p>
-        </div>
-
-        <!-- Quick Links -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
-          <ul class="space-y-2 text-gray-200 text-sm">
-            <li><a href="#" class="hover:text-emerald-400 transition">Home</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">Products</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">About Us</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">Contact</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact Info -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
-          <ul class="space-y-2 text-gray-200 text-sm">
-            <li>📧 info@productmanager.com</li>
-            <li>📞 +1 (555) 123-4567</li>
-            <li>📍 123 Shopping Street, City</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="border-t border-gray-400 mt-8 pt-6 text-center text-gray-300 text-sm">
-        <p>&copy; 2024 Product Manager. All rights reserved.</p>
+    <div class="max-w-6xl mx-auto px-6 py-6">
+      <div class="text-center text-gray-200">
+        <p class="text-lg font-semibold mb-2">Product Manager</p>
+        <p class="text-sm">&copy; 2024 Product Manager. All rights reserved.</p>
       </div>
     </div>
   </footer>
