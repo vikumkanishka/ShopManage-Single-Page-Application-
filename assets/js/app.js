@@ -59,8 +59,7 @@ function displayProducts(products) {
         </div>
       `;
     });
-  }
-  
+}
 
 function openAddModal() {
     form.reset();
@@ -74,6 +73,7 @@ function openEditModal(product) {
     modalTitle.innerText = "Edit Product";
     productId.value = product.id;
     title.value = product.title;
+    description.value = product.description || "";
     price.value = product.price;
     category.value = product.category;
     image.value = product.thumbnail;
@@ -85,12 +85,13 @@ function closeModal() {
     modal.classList.add("hidden");
 }
 
-form.addEventListener("submit", async e => {
+form.addEventListener("submit", async function(e) {
     e.preventDefault();
     const id = productId.value;
 
     const product = {
         title: title.value,
+        description: description.value,
         price: price.value,
         category: category.value,
         thumbnail: image.value
@@ -104,7 +105,9 @@ form.addEventListener("submit", async e => {
                 body: JSON.stringify(product)
             });
             // Update in array
-            const index = productsArray.findIndex(p => p.id == id);
+            const index = productsArray.findIndex(function(p) {
+                return p.id == id;
+            });
             if (index !== -1) {
                 productsArray[index] = { ...productsArray[index], ...product };
             }
@@ -131,7 +134,9 @@ async function deleteProduct(id) {
     if (!confirm("Delete this product?")) return;
     await fetch(API_URL + "/" + id, { method: "DELETE" });
     // Remove from array
-    productsArray = productsArray.filter(p => p.id !== id);
+    productsArray = productsArray.filter(function(p) {
+        return p.id !== id;
+    });
     document.getElementById("product-" + id).remove();
 }
 
