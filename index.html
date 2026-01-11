@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="bg-overlay min-h-screen flex flex-col">
 
@@ -17,38 +18,38 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-section py-20 px-6">
+  <section class="hero-section py-10 px-6">
     <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 hero-title">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 hero-title">
         Discover Amazing Products
       </h1>
-      <p class="text-xl md:text-2xl text-gray-100 mb-8 hero-subtitle">
+      <p class="text-lg md:text-xl text-gray-100 mb-6 hero-subtitle">
         Your trusted destination for quality products across all categories
       </p>
-      <div class="flex flex-wrap justify-center gap-4">
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
         <button onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'})" 
-          class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+          class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
           Browse Products
         </button>
         <button onclick="openAddModal()" 
-          class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+          class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
           Add New Product
         </button>
       </div>
       
       <!-- Stats -->
-      <div class="grid grid-cols-3 gap-6 mt-16 max-w-2xl mx-auto">
+      <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
         <div class="hero-stat">
-          <h3 class="text-3xl font-bold text-white mb-2">500+</h3>
-          <p class="text-gray-200 text-sm">Products</p>
+          <h3 class="text-2xl font-bold text-white mb-1">500+</h3>
+          <p class="text-gray-200 text-xs">Products</p>
         </div>
         <div class="hero-stat">
-          <h3 class="text-3xl font-bold text-white mb-2">50+</h3>
-          <p class="text-gray-200 text-sm">Categories</p>
+          <h3 class="text-2xl font-bold text-white mb-1">50+</h3>
+          <p class="text-gray-200 text-xs">Categories</p>
         </div>
         <div class="hero-stat">
-          <h3 class="text-3xl font-bold text-white mb-2">24/7</h3>
-          <p class="text-gray-200 text-sm">Support</p>
+          <h3 class="text-2xl font-bold text-white mb-1">24/7</h3>
+          <p class="text-gray-200 text-xs">Support</p>
         </div>
       </div>
     </div>
@@ -101,14 +102,13 @@
 
   <!-- Footer -->
   <footer class="footer-section">
-    <div class="max-w-6xl mx-auto px-6 py-6">
+    <div class="max-w-6xl mx-auto px-6 py-2">
       <div class="text-center text-gray-200">
-        <p class="text-lg font-semibold mb-2">Product Manager</p>
-        <p class="text-sm">&copy; 2024 Product Manager. All rights reserved.</p>
+        <p class="text-sm">Product Manager &copy; 2024 - All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script src="/assets/js/app.js"></script>
 </body>
-</html>
+</html> 
