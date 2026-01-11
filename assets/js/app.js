@@ -43,6 +43,20 @@ function displayProducts(products) {
             <span class="inline-block text-xs bg-gray-200 px-2 py-1 rounded">
               ${p.category}
             </span>
+
+            <!-- Stock Count -->
+            <div class="flex items-center gap-2 text-sm">
+              <span class="font-medium">Stock:</span>
+              <span class="${p.stock > 0 ? 'text-green-600' : 'text-red-600'}">
+                ${p.stock !== undefined ? p.stock : 'N/A'}
+              </span>
+            </div>
+
+            <!-- Warranty Information -->
+            <div class="text-sm text-gray-700">
+              <span class="font-medium">Warranty:</span>
+              <span>${p.warrantyInformation || 'No warranty information'}</span>
+            </div>
   
             <div class="flex gap-2 mt-4">
               <button onclick='openEditModal(${JSON.stringify(p)})'
