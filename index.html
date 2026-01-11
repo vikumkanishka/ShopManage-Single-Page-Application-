@@ -4,119 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Manager</title>
+
+  
   <script src="https://cdn.tailwindcss.com"></script>
+
+  
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
-<body class="bg-overlay min-h-screen flex flex-col">
+<body class="bg-overlay min-h-screen">
 
-  <!-- Navigation Bar -->
+  
   <nav class="navigatebar backdrop-blur-md text-white px-6 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold tracking-wide">Product Manager</h1>
-    <button onclick="openAddModal()" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition">
-      + Add Product
-    </button>
+    <button onclick="openAddModal()" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition"> + Add Product</button>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section py-10 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 hero-title">
-        Discover Amazing Products
-      </h1>
-      <p class="text-lg md:text-xl text-gray-100 mb-6 hero-subtitle">
-        Your trusted destination for quality products across all categories
-      </p>
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <button onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'})" 
-          class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
-          Browse Products
-        </button>
-        <button onclick="openAddModal()" 
-          class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
-          Add New Product
-        </button>
-      </div>
-      
-      <!-- Stats -->
-      <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-        <div class="hero-stat">
-          <h3 class="text-2xl font-bold text-white mb-1">500+</h3>
-          <p class="text-gray-200 text-xs">Products</p>
-        </div>
-        <div class="hero-stat">
-          <h3 class="text-2xl font-bold text-white mb-1">50+</h3>
-          <p class="text-gray-200 text-xs">Categories</p>
-        </div>
-        <div class="hero-stat">
-          <h3 class="text-2xl font-bold text-white mb-1">24/7</h3>
-          <p class="text-gray-200 text-xs">Support</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
+  <div id="loader" class="flex justify-center items-center mt-20">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+  </div>
 
-  <!-- Categories Filter Section -->
-  <section class="categories-filter-section">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-2xl font-bold text-white text-center mb-6">Shop by Category</h2>
-      <div class="flex flex-wrap justify-center gap-4">
-        <button onclick="filterByCategory('all')" class="category-btn active" data-category="all">
-          All Products
-        </button>
-        <button onclick="filterByCategory('beauty')" class="category-btn" data-category="beauty">
-          Beauty
-        </button>
-        <button onclick="filterByCategory('fragrances')" class="category-btn" data-category="fragrances">
-          Fragrances
-        </button>
-        <button onclick="filterByCategory('furniture')" class="category-btn" data-category="furniture">
-          Furniture
-        </button>
-        <button onclick="filterByCategory('groceries')" class="category-btn" data-category="groceries">
-          Groceries
-        </button>
-      </div>
-    </div>
-  </section>
+  
+  <div id="productGrid"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+  </div>
 
-  <!-- Main Content -->
-  <main class="flex-grow">
-    <!-- Loader -->
-    <div id="loader" class="flex justify-center items-center mt-20 mb-20">
-      <div class="flex flex-col items-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
-        <p class="text-white text-lg">Loading products...</p>
-      </div>
-    </div>
-
-    <!-- Product Grid -->
-    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 min-h-[400px]">
-    </div>
-  </main>
-
-  <!-- Product Modal -->
-  <div id="productModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50">
+  
+  <div id="productModal"
+    class="fixed inset-0 bg-black/60 hidden justify-center items-center">
     <div class="bg-white rounded-xl w-full max-w-md p-6 relative">
       <h2 id="modalTitle" class="text-xl font-bold mb-4">Add Product</h2>
 
       <form id="productForm" class="space-y-4">
         <input type="hidden" id="productId">
 
-        <input id="title" type="text" placeholder="Product Title" class="w-full border p-2 rounded-lg" required>
+        <input id="title" type="text" placeholder="Product Title"
+          class="w-full border p-2 rounded-lg" required>
 
-        <textarea id="description" placeholder="Product Description" class="w-full border p-2 rounded-lg" rows="3"></textarea>
+        <textarea id="description" placeholder="Product Description"
+          class="w-full border p-2 rounded-lg" rows="3"></textarea>
 
-        <input id="price" type="number" placeholder="Price" class="w-full border p-2 rounded-lg" required>
+        <input id="price" type="number" placeholder="Price"
+          class="w-full border p-2 rounded-lg" required>
 
-        <input id="category" type="text" placeholder="Category" class="w-full border p-2 rounded-lg" required>
+        <input id="category" type="text" placeholder="Category"
+          class="w-full border p-2 rounded-lg" required>
 
-        <input id="image" type="text" placeholder="Image URL" class="w-full border p-2 rounded-lg">
+        <input id="image" type="text" placeholder="Image URL"
+          class="w-full border p-2 rounded-lg">
 
         <div class="flex justify-end gap-3">
-          <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded-lg">
-            Cancel
-          </button>
-          <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg">
+          <button type="button" onclick="closeModal()"
+            class="px-4 py-2 bg-gray-300 rounded-lg">Cancel</button>
+          <button type="submit"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-lg">
             Save
           </button>
         </div>
@@ -124,15 +65,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="footer-section">
-    <div class="max-w-6xl mx-auto px-6 py-2">
-      <div class="text-center text-gray-200">
-        <p class="text-sm">Product Manager &copy; 2024 - All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
+  
   <script src="/assets/js/app.js"></script>
 </body>
 </html>
