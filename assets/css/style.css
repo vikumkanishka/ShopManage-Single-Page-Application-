@@ -85,6 +85,13 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Categories Filter Section */
+.categories-filter-section {
+  padding: 2rem 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
 .category-btn {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -107,6 +114,32 @@
   background: #5B913B;
   border-color: #5B913B;
   box-shadow: 0 4px 10px rgba(9, 88, 37, 0.5);
+}
+
+/* Custom Notification Popup */
+#notification {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #10b981;
+}
+
+#notification.error {
+  border-left-color: #ef4444;
+}
+
+/* Delete Modal Animation */
+#deleteModal > div {
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Animations - Only for Hero Section */
