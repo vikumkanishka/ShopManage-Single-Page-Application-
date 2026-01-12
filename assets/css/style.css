@@ -1,36 +1,109 @@
-
 .bg-overlay {
-    background:
-      url("/assets/img/back.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-  }
-  
-  
-  .product-card {
-    background-color: rgba(51, 48, 48, 0.321);
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
-  }
-  .navigatebar {
-    /* background-color:#850e366b; */
-    backdrop-filter: blur(10px);
-    background: #850e36dd;
-  }
-  .buttonEdit {
-    background-color: #EE6983;
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
-  }
+  background: url("/assets/img/green-natural-background-with-wooden-surface-free-image.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
-  .buttonDelete {
-    background-color: #b02742;
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
+/* Product Cards */
+.product-card {
+  background-color: rgba(51, 48, 48, 0.321);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+}
+
+/* Navigation Bar */
+/* .navigatebar {
+  backdrop-filter: blur(10px);
+  background: #850e36dd;
+} */
+
+/* Buttons */
+.buttonEdit {
+  background-color: #5B913B;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonDelete {
+  background-color: #ba0000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Footer */
+.footer-section {
+  background: rgba(19, 106, 18, 0.373);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, rgba(14, 133, 26, 0.3), rgba(15, 47, 14, 0.61));
+  backdrop-filter: blur(5px);
+}
+
+.hero-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-stat {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Categories Filter Section */
+.categories-filter-section {
+  padding: 2rem 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.category-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.category-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: #5B913B;
+  border-color: #5B913B;
+  box-shadow: 0 4px 10px rgba(9, 88, 37, 0.5);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

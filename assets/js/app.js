@@ -6,15 +6,21 @@ const form = document.getElementById("productForm");
 
 // Global array to store products
 let productsArray = [];
+let currentCategory = 'all';
 
 async function loadProducts() {
+    loader.style.display = "flex";
+    grid.innerHTML = "";
+    
     try {
         const res = await fetch(API_URL + "?limit=16");
         const data = await res.json();
-        productsArray = data.products; // Store in array
+        productsArray = data.products;
         displayProducts(productsArray);
-    } catch {
+    } catch (error) {
+        console.error("Error loading products:", error);
         alert("Failed to load products");
+        grid.innerHTML = '<div class="col-span-full text-center text-white text-xl">Failed to load products. Please try again.</div>';
     } finally {
         loader.style.display = "none";
     }
@@ -23,56 +29,60 @@ async function loadProducts() {
 function displayProducts(products) {
     grid.innerHTML = "";
   
+    if (!products || products.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center text-white text-xl">No products available.</div>';
+        return;
+    }
+
     products.forEach(function (p) {
-      grid.innerHTML += `
-        <div id="product-${p.id}"
-          class="product-card rounded-xl overflow-hidden shadow-lg">
-          
-          <img src="${p.thumbnail}" class="h-48 w-full object-cover">
-  
-          <div class="p-4 space-y-2">
-            <h3 class="font-bold text-lg">${p.title}</h3>
-  
-            <!-- Description -->
-            <p class="text-sm text-gray-600 line-clamp-2">
-              ${p.description ? p.description : "No description available."}
-            </p>
-  
-            <p class="text-indigo-600 font-semibold">$${p.price}</p>
-  
-            <span class="inline-block text-xs bg-gray-200 px-2 py-1 rounded">
-              ${p.category}
-            </span>
-
-            <!-- Stock Count -->
-            <div class="flex items-center gap-2 text-sm">
-              <span class="font-medium">Stock:</span>
-              <span class="${p.stock > 0 ? 'text-green-600' : 'text-red-600'}">
-                ${p.stock !== undefined ? p.stock : 'N/A'}
-              </span>
+      const productCard = `
+        <div id="product-${p.id}" class="product-card rounded-xl overflow-hidden shadow-lg h-[500px] w-full flex flex-col">
+          <img src="${p.thumbnail}" alt="${p.title}" class="h-48 w-full object-cover flex-shrink-0">
+          <div class="p-4 flex-1 flex flex-col text-white">
+            <div class="space-y-2 flex-1">
+              <h3 class="font-bold text-lg">${p.title}</h3>
+              <p class="text-sm text-gray-200 line-clamp-2">${p.description || "No description available."}</p>
+              <p class="text-emerald-400 font-semibold">$${p.price}</p>
+              <span class="inline-block text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded w-fit">${p.category}</span>
+              <div class="flex items-center gap-2 text-sm">
+                <span class="font-medium">Stock:</span>
+                <span class="${p.stock > 0 ? 'text-green-400' : 'text-red-400'}">${p.stock !== undefined ? p.stock : 'N/A'}</span>
+              </div>
+              <div class="text-sm text-gray-200">
+                <span class="font-medium">Warranty:</span>
+                <span>${p.warrantyInformation || 'No warranty information'}</span>
+              </div>
             </div>
-
-            <!-- Warranty Information -->
-            <div class="text-sm text-gray-700">
-              <span class="font-medium">Warranty:</span>
-              <span>${p.warrantyInformation || 'No warranty information'}</span>
-            </div>
-  
-            <div class="flex gap-2 mt-4">
-              <button onclick='openEditModal(${JSON.stringify(p)})'
-                class="buttonEdit flex-1 hover:bg-yellow-500 rounded-lg py-1 transition">
-                Edit
-              </button>
-  
-              <button onclick="deleteProduct(${p.id})"
-                class="buttonDelete flex-1 hover:bg-red-600 text-white rounded-lg py-1 transition">
-                Delete
-              </button>
+            <div class="flex gap-2 pt-4 flex-shrink-0">
+              <button onclick='openEditModal(${JSON.stringify(p).replace(/'/g, "&apos;")})' class="buttonEdit flex-1 text-white hover:bg-yellow-500 rounded-lg py-1 transition">Edit</button>
+              <button onclick="deleteProduct(${p.id})" class="buttonDelete flex-1 hover:bg-red-600 text-white rounded-lg py-1 transition">Delete</button>
             </div>
           </div>
         </div>
       `;
+      grid.innerHTML += productCard;
     });
+}
+
+function filterByCategory(category) {
+    currentCategory = category;
+    
+    document.querySelectorAll('.category-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-category="${category}"]`).classList.add('active');
+    
+    let filteredProducts;
+    if (category === 'all') {
+        filteredProducts = productsArray;
+    } else {
+        filteredProducts = productsArray.filter(function(p) {
+            return p.category.toLowerCase() === category.toLowerCase();
+        });
+    }
+    
+    displayProducts(filteredProducts);
+    document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function openAddModal() {
@@ -91,6 +101,7 @@ function openEditModal(product) {
     price.value = product.price;
     category.value = product.category;
     image.value = product.thumbnail;
+    stock.value = product.stock || 0;
     modal.classList.remove("hidden");
     modal.classList.add("flex");
 }
@@ -108,7 +119,8 @@ form.addEventListener("submit", async function(e) {
         description: description.value,
         price: price.value,
         category: category.value,
-        thumbnail: image.value
+        thumbnail: image.value,
+        stock: parseInt(stock.value) || 0
     };
 
     try {
