@@ -85,12 +85,6 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Categories Filter Section */
-.categories-filter-section {
-  padding: 2rem 1.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-}
 
 .category-btn {
   background: rgba(255, 255, 255, 0.1);
