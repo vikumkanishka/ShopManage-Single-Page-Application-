@@ -1,6 +1,5 @@
-/* Background Overlay */
 .bg-overlay {
-  background: url("/assets/img/green-natural-background-with-wooden-surface-free-image.webp");
+  background: url("../img/green-natural-background-with-wooden-surface-free-image.webp");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -18,50 +17,40 @@
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
 }
 
-/* Navigation Bar */
-.navigatebar {
-  backdrop-filter: blur(10px);
-  background: #850e36dd;
-}
-
 /* Buttons */
 .buttonEdit {
-  background-color: #EE6983;
+  background-color: #5B913B;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .buttonDelete {
-  background-color: #b02742;
+  background-color: #ba0000;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 /* Footer */
 .footer-section {
-  background: linear-gradient(135deg, rgba(26, 35, 126, 0.9) 0%, rgba(13, 71, 161, 0.85) 50%, rgba(21, 101, 192, 0.9) 100%);
-  backdrop-filter: blur(15px);
-  border-top: 2px solid rgba(255, 255, 255, 0.2);
-  margin-top: auto;
-  width: 100%;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-  padding: 1rem 0;
+  background: rgba(19, 106, 18, 0.373);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.9) 0%, rgba(56, 142, 60, 0.85) 50%, rgba(46, 125, 50, 0.9) 100%);
-  backdrop-filter: blur(20px);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(14, 133, 26, 0.3), rgba(15, 47, 14, 0.61));
+  backdrop-filter: blur(5px);
+  animation: fadeIn 1s ease-out;
 }
 
 .hero-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 0.8s ease-out;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   animation: fadeInUp 1s ease-out;
   animation-delay: 0.2s;
   opacity: 0;
@@ -69,20 +58,94 @@
 }
 
 .hero-stat {
-  background: rgba(36, 117, 29, 0.826);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1.2s ease-out;
+  animation-fill-mode: both;
+}
+
+.hero-stat:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.hero-stat:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.hero-stat:nth-child(3) {
+  animation-delay: 0.8s;
 }
 
 .hero-stat:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Animations */
+
+.category-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.category-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: #5B913B;
+  border-color: #5B913B;
+  box-shadow: 0 4px 10px rgba(9, 88, 37, 0.5);
+}
+
+/* Custom Notification Popup */
+#notification {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #10b981;
+}
+
+#notification.error {
+  border-left-color: #ef4444;
+}
+
+/* Delete Modal Animation */
+#deleteModal > div {
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animations - Only for Hero Section */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

@@ -5,6 +5,40 @@ const modal = document.getElementById("productModal");
 const form = document.getElementById("productForm");
 
 let productsArray = [];
+let currentCategory = 'all';
+let productToDelete = null;
+
+// Notification functions
+function showNotification(title, message, type = 'success') {
+    const notification = document.getElementById('notification');
+    const notificationTitle = document.getElementById('notificationTitle');
+    const notificationMessage = document.getElementById('notificationMessage');
+    const notificationIcon = document.getElementById('notificationIcon');
+    const successIcon = document.getElementById('successIcon');
+    const errorIcon = document.getElementById('errorIcon');
+    
+    notificationTitle.textContent = title;
+    notificationMessage.textContent = message;
+    
+    if (type === 'success') {
+        notificationIcon.style.backgroundColor = '#10b981';
+        successIcon.classList.remove('hidden');
+        errorIcon.classList.add('hidden');
+    } else {
+        notificationIcon.style.backgroundColor = '#ef4444';
+        successIcon.classList.add('hidden');
+        errorIcon.classList.remove('hidden');
+    }
+    
+    notification.style.transform = 'translateX(0)';
+    
+    setTimeout(hideNotification, 3000);
+}
+
+function hideNotification() {
+    const notification = document.getElementById('notification');
+    notification.style.transform = 'translateX(400px)';
+}
 
 async function loadProducts() {
     loader.style.display = "flex";
@@ -17,7 +51,7 @@ async function loadProducts() {
         displayProducts(productsArray);
     } catch (error) {
         console.error("Error loading products:", error);
-        alert("Failed to load products");
+        showNotification('Error', 'Failed to load products. Please try again.', 'error');
         grid.innerHTML = '<div class="col-span-full text-center text-white text-xl">Failed to load products. Please try again.</div>';
     } finally {
         loader.style.display = "none";
@@ -62,6 +96,27 @@ function displayProducts(products) {
     });
 }
 
+function filterByCategory(category) {
+    currentCategory = category;
+    
+    document.querySelectorAll('.category-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-category="${category}"]`).classList.add('active');
+    
+    let filteredProducts;
+    if (category === 'all') {
+        filteredProducts = productsArray;
+    } else {
+        filteredProducts = productsArray.filter(function(p) {
+            return p.category.toLowerCase() === category.toLowerCase();
+        });
+    }
+    
+    displayProducts(filteredProducts);
+    document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function openAddModal() {
     form.reset();
     productId.value = "";
@@ -78,12 +133,14 @@ function openEditModal(product) {
     price.value = product.price;
     category.value = product.category;
     image.value = product.thumbnail;
+    stock.value = product.stock || 0;
     modal.classList.remove("hidden");
     modal.classList.add("flex");
 }
 
 function closeModal() {
     modal.classList.add("hidden");
+    modal.classList.remove("flex");
 }
 
 form.addEventListener("submit", async function(e) {
@@ -95,7 +152,8 @@ form.addEventListener("submit", async function(e) {
         description: description.value,
         price: price.value,
         category: category.value,
-        thumbnail: image.value
+        thumbnail: image.value,
+        stock: parseInt(stock.value) || 0
     };
 
     try {
@@ -111,7 +169,7 @@ form.addEventListener("submit", async function(e) {
             if (index !== -1) {
                 productsArray[index] = { ...productsArray[index], ...product };
             }
-            alert("Product Updated");
+            showNotification('Success', 'Product updated successfully!', 'success');
         } else {
             const res = await fetch(API_URL + "/add", {
                 method: "POST",
@@ -120,22 +178,57 @@ form.addEventListener("submit", async function(e) {
             });
             const newProduct = await res.json();
             productsArray.unshift(newProduct);
-            alert("Product Added");
+            showNotification('Success', 'Product added successfully!', 'success');
         }
         closeModal();
-        displayProducts(productsArray);
+        
+        // Re-apply current filter after add/update
+        if (currentCategory === 'all') {
+            displayProducts(productsArray);
+        } else {
+            const filteredProducts = productsArray.filter(function(p) {
+                return p.category.toLowerCase() === currentCategory.toLowerCase();
+            });
+            displayProducts(filteredProducts);
+        }
     } catch {
-        alert("Save failed");
+        showNotification('Error', 'Failed to save product. Please try again.', 'error');
     }
 });
 
+function openDeleteModal(id) {
+    productToDelete = id;
+    const deleteModal = document.getElementById('deleteModal');
+    deleteModal.classList.remove('hidden');
+    deleteModal.classList.add('flex');
+}
+
+function closeDeleteModal() {
+    productToDelete = null;
+    const deleteModal = document.getElementById('deleteModal');
+    deleteModal.classList.add('hidden');
+    deleteModal.classList.remove('flex');
+}
+
+async function confirmDelete() {
+    if (!productToDelete) return;
+    
+    try {
+        await fetch(API_URL + "/" + productToDelete, { method: "DELETE" });
+        productsArray = productsArray.filter(function(p) {
+            return p.id !== productToDelete;
+        });
+        document.getElementById("product-" + productToDelete).remove();
+        showNotification('Success', 'Product deleted successfully!', 'success');
+    } catch {
+        showNotification('Error', 'Failed to delete product. Please try again.', 'error');
+    }
+    
+    closeDeleteModal();
+}
+
 async function deleteProduct(id) {
-    if (!confirm("Delete this product?")) return;
-    await fetch(API_URL + "/" + id, { method: "DELETE" });
-    productsArray = productsArray.filter(function(p) {
-        return p.id !== id;
-    });
-    document.getElementById("product-" + id).remove();
+    openDeleteModal(id);
 }
 
 loadProducts();

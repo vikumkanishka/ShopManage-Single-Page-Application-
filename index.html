@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="bg-overlay min-h-screen flex flex-col">
 
-  <!-- Navigation Bar -->
+
   <nav class="navigatebar backdrop-blur-md text-white px-6 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold tracking-wide">Product Manager</h1>
     <button onclick="openAddModal()" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-lg font-semibold transition">
@@ -17,47 +17,67 @@
     </button>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section py-20 px-6">
+
+  <section class="hero-section py-10 px-6">
     <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 hero-title">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 hero-title">
         Discover Amazing Products
       </h1>
-      <p class="text-xl md:text-2xl text-gray-100 mb-8 hero-subtitle">
+      <p class="text-lg md:text-xl text-gray-100 mb-6 hero-subtitle">
         Your trusted destination for quality products across all categories
       </p>
-      <div class="flex flex-wrap justify-center gap-4">
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
         <button onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'})" 
-          class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+          class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105">
           Browse Products
-        </button>
-        <button onclick="openAddModal()" 
-          class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
-          Add New Product
         </button>
       </div>
       
-      <!-- Stats -->
-      <div class="grid grid-cols-3 gap-6 mt-16 max-w-2xl mx-auto">
+
+      <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
         <div class="hero-stat">
-          <h3 class="text-3xl font-bold text-white mb-2">500+</h3>
-          <p class="text-gray-200 text-sm">Products</p>
+          <h3 class="text-2xl font-bold text-white mb-1">500+</h3>
+          <p class="text-gray-200 text-xs">Products</p>
         </div>
         <div class="hero-stat">
-          <h3 class="text-3xl font-bold text-white mb-2">50+</h3>
-          <p class="text-gray-200 text-sm">Categories</p>
+          <h3 class="text-2xl font-bold text-white mb-1">50+</h3>
+          <p class="text-gray-200 text-xs">Categories</p>
         </div>
         <div class="hero-stat">
-          <h3 class="text-3xl font-bold text-white mb-2">24/7</h3>
-          <p class="text-gray-200 text-sm">Support</p>
+          <h3 class="text-2xl font-bold text-white mb-1">24/7</h3>
+          <p class="text-gray-200 text-xs">Support</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Main Content -->
+
+  <section class="categories-filter-section">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-bold text-white text-center mb-6">Shop by Category</h2>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="filterByCategory('all')" class="category-btn active" data-category="all">
+          All Products
+        </button>
+        <button onclick="filterByCategory('beauty')" class="category-btn" data-category="beauty">
+          Beauty
+        </button>
+        <button onclick="filterByCategory('fragrances')" class="category-btn" data-category="fragrances">
+          Fragrances
+        </button>
+        <button onclick="filterByCategory('furniture')" class="category-btn" data-category="furniture">
+          Furniture
+        </button>
+        <button onclick="filterByCategory('groceries')" class="category-btn" data-category="groceries">
+          Groceries
+        </button>
+      </div>
+    </div>
+  </section>
+
+
   <main class="flex-grow">
-    <!-- Loader -->
+
     <div id="loader" class="flex justify-center items-center mt-20 mb-20">
       <div class="flex flex-col items-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
@@ -65,12 +85,12 @@
       </div>
     </div>
 
-    <!-- Product Grid -->
+
     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 min-h-[400px]">
     </div>
   </main>
 
-  <!-- Product Modal -->
+
   <div id="productModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50">
     <div class="bg-white rounded-xl w-full max-w-md p-6 relative">
       <h2 id="modalTitle" class="text-xl font-bold mb-4">Add Product</h2>
@@ -86,6 +106,8 @@
 
         <input id="category" type="text" placeholder="Category" class="w-full border p-2 rounded-lg" required>
 
+        <input id="stock" type="number" placeholder="Stock Quantity" min="0" class="w-full border p-2 rounded-lg" required>
+
         <input id="image" type="text" placeholder="Image URL" class="w-full border p-2 rounded-lg">
 
         <div class="flex justify-end gap-3">
@@ -100,16 +122,61 @@
     </div>
   </div>
 
-  <!-- Footer -->
+
   <footer class="footer-section">
-    <div class="max-w-6xl mx-auto px-6 py-6">
+    <div class="max-w-6xl mx-auto px-6 py-2">
       <div class="text-center text-gray-200">
-        <p class="text-lg font-semibold mb-2">Product Manager</p>
-        <p class="text-sm">&copy; 2024 Product Manager. All rights reserved.</p>
+        <p class="text-sm">Product Manager &copy; 2024 - All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script src="/assets/js/app.js"></script>
+
+  <div id="notification" class="fixed top-5 right-5 bg-white rounded-lg shadow-2xl p-4 min-w-[300px] transform translate-x-[400px] transition-transform duration-300 z-[100]">
+    <div class="flex items-center gap-3">
+      <div id="notificationIcon" class="w-10 h-10 rounded-full flex items-center justify-center">
+        <svg id="successIcon" class="w-6 h-6 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <svg id="errorIcon" class="w-6 h-6 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h4 id="notificationTitle" class="font-semibold text-gray-800"></h4>
+        <p id="notificationMessage" class="text-sm text-gray-600"></p>
+      </div>
+      <button onclick="hideNotification()" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
+  <div id="deleteModal" class="fixed inset-0 bg-black/60 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-xl w-full max-w-md p-6 relative">
+      <div class="text-center">
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+          <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Delete Product</h3>
+        <p class="text-sm text-gray-500 mb-6">Are you sure you want to delete this product? This action cannot be undone.</p>
+        <div class="flex gap-3 justify-center">
+          <button onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg transition">
+            Cancel
+          </button>
+          <button onclick="confirmDelete()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
