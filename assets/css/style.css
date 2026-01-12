@@ -17,12 +17,6 @@
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
 }
 
-/* Navigation Bar */
-/* .navigatebar {
-  backdrop-filter: blur(10px);
-  background: #850e36dd;
-} */
-
 /* Buttons */
 .buttonEdit {
   background-color: #5B913B;
@@ -47,14 +41,20 @@
 .hero-section {
   background: linear-gradient(135deg, rgba(14, 133, 26, 0.3), rgba(15, 47, 14, 0.61));
   backdrop-filter: blur(5px);
+  animation: fadeIn 1s ease-out;
 }
 
 .hero-title {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-subtitle {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out;
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
 .hero-stat {
@@ -63,13 +63,26 @@
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1.2s ease-out;
+  animation-fill-mode: both;
 }
 
-/* Categories Filter Section */
-.categories-filter-section {
-  padding: 2rem 1.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+.hero-stat:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.hero-stat:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.hero-stat:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.hero-stat:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .category-btn {
@@ -96,7 +109,16 @@
   box-shadow: 0 4px 10px rgba(9, 88, 37, 0.5);
 }
 
-/* Animations */
+/* Animations - Only for Hero Section */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

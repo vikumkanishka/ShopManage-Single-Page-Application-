@@ -108,6 +108,7 @@ function openEditModal(product) {
 
 function closeModal() {
     modal.classList.add("hidden");
+    modal.classList.remove("flex");
 }
 
 form.addEventListener("submit", async function(e) {
