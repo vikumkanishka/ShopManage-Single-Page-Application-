@@ -105,6 +105,7 @@ function openEditModal(product) {
     price.value = product.price;
     category.value = product.category;
     image.value = product.thumbnail;
+    stock.value = product.stock || 0;
     modal.classList.remove("hidden");
     modal.classList.add("flex");
 }
@@ -122,7 +123,8 @@ form.addEventListener("submit", async function(e) {
         description: description.value,
         price: price.value,
         category: category.value,
-        thumbnail: image.value
+        thumbnail: image.value,
+        stock: parseInt(stock.value) || 0
     };
 
     try {
